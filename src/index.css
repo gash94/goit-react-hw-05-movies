@@ -2,14 +2,14 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+    font-family: "Poppins", sans-serif;
+    background: rgb(47, 39, 181);
+    background: linear-gradient(
+        357deg,
+        rgba(47, 39, 181, 1) 0%,
+        rgba(48, 48, 204, 1) 25%,
+        rgba(0, 212, 255, 1) 100%
+    );
+    background-size: cover;
+    background-attachment: fixed;
 }
