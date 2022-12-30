@@ -68,7 +68,7 @@ class App extends Component {
                 {images.length && <Button onClick={this.handleLoadMore} />}
                 {isLoading && <Loader />}
                 {showModal && (
-                    <Modal onClose={this.onClose} pic={largeImageURL} />
+                    <Modal onClose={this.onClose} image={largeImageURL} />
                 )}
             </div>
         );

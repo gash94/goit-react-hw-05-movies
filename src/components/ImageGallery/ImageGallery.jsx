@@ -11,12 +11,13 @@ export default class ImageGallery extends Component {
 
         return (
             <ul className={css.ImageGallery}>
-                {images.map(({ webformatURL, largeImageURL, id }) => (
+                {images.map(({ webformatURL, largeImageURL, id, tags }) => (
                     <ImageGalleryItem
                         key={id}
                         webformatURL={webformatURL}
                         largeImageURL={largeImageURL}
                         onShow={onShow}
+                        tags={tags}
                     />
                 ))}
             </ul>
@@ -31,6 +32,7 @@ ImageGallery.propTypes = {
             id: PropTypes.number.isRequired,
             largeImageURL: PropTypes.string.isRequired,
             webformatURL: PropTypes.string.isRequired,
+            tags: PropTypes.string.isRequired,
         })
     ),
 };

@@ -20,11 +20,11 @@ export default class Modal extends Component {
     };
 
     render() {
-        const { pic } = this.props;
+        const { image } = this.props;
         return (
             <div className={css.Overlay} onClick={this.handleKeyDown}>
                 <div className={css.Modal}>
-                    <img src={pic} alt="" />
+                    <img src={image} alt="" />
                 </div>
             </div>
         );
@@ -33,5 +33,5 @@ export default class Modal extends Component {
 
 Modal.propTypes = {
     onClose: PropTypes.func,
-    pic: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
 };
