@@ -63,6 +63,7 @@ function App() {
 
     return (
         <div className={css.App}>
+            {error && <p>Something went wrong: {error.message}</p>}
             <Searchbar onSubmit={onSubmit} />
             <ImageGallery images={images} onShow={onShow} />
             {images.length && <Button onClick={handleLoadMore} />}
