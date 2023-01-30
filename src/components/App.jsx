@@ -1,78 +1,75 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
+import fetchImg from "../services/PixabayApi";
 
 import css from "./App.module.css";
 
-import { fetchImg } from "../services/PixabayApi";
 import Loader from "./Loader/Loader";
 import Searchbar from "./Searchbar/Searchbar";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import Modal from "./Modal/Modal";
 import Button from "./Button/Button";
 
-class App extends Component {
-    state = {
-        query: "",
-        page: 1,
-        images: [],
-        error: null,
-        isLoading: false,
-        showModal: false,
-        largeImageURL: "",
-        webformatURL: "",
-    };
+function App() {
+    const [query, setQuery] = useState("");
+    const [page, setPage] = useState(1);
+    const [images, setImages] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [largeImageURL, setLargeImageURL] = useState("");
 
-    onSubmit = (query) => {
-        if (query !== this.state.query) {
-            this.setState({ images: [], page: 1, query }, () => {
-                this.fetchQuery(query);
-            });
+    const onSubmit = (queryInput) => {
+        if (queryInput !== query) {
+            setImages([]);
+            setPage(1);
+            setQuery(queryInput);
         }
     };
 
-    fetchQuery = async (valueQuery) => {
-        this.setState({ isLoading: true, error: null });
-        try {
-            const response = await fetchImg(valueQuery, this.state.page);
-            this.setState((prevState) => ({
-                images: [...prevState.images, ...response],
-            }));
-        } catch (error) {
-            this.setState({ error });
-        } finally {
-            setTimeout(() => {
-                this.setState({ isLoading: false });
-            }, 600);
-        }
+    useEffect(() => {
+        if (query === "") return;
+
+        const fetchQuery = async (valueQuery) => {
+            setIsLoading(true);
+            setError(null);
+            try {
+                const response = await fetchImg(valueQuery, page);
+                setImages((prevState) => [...prevState, ...response]);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 600);
+            }
+        };
+
+        fetchQuery(query);
+    }, [page, query]);
+
+    const handleLoadMore = () => {
+        setPage((prevState) => prevState + 1);
     };
 
-    handleLoadMore = () => {
-        this.setState({ page: this.state.page + 1 }, () => {
-            this.fetchQuery(this.state.query);
-        });
+    const onShow = (url) => {
+        setShowModal(true);
+        setLargeImageURL(url);
     };
 
-    onShow = (url) => {
-        this.setState({ showModal: true, largeImageURL: url });
+    const onClose = () => {
+        setShowModal(false);
+        setLargeImageURL("");
     };
 
-    onClose = () => {
-        this.setState({ showModal: false, largeImageURL: "" });
-    };
-
-    render() {
-        const { images, isLoading, largeImageURL, showModal } = this.state;
-        return (
-            <div className={css.App}>
-                <Searchbar onSubmit={this.onSubmit} />
-                <ImageGallery images={images} onShow={this.onShow} />
-                {images.length && <Button onClick={this.handleLoadMore} />}
-                {isLoading && <Loader />}
-                {showModal && (
-                    <Modal onClose={this.onClose} image={largeImageURL} />
-                )}
-            </div>
-        );
-    }
+    return (
+        <div className={css.App}>
+            <Searchbar onSubmit={onSubmit} />
+            <ImageGallery images={images} onShow={onShow} />
+            {images.length && <Button onClick={handleLoadMore} />}
+            {isLoading && <Loader />}
+            {showModal && <Modal onClose={onClose} image={largeImageURL} />}
+        </div>
+    );
 }
 
 export default App;
