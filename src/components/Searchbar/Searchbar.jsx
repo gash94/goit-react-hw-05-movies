@@ -1,25 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import css from "./Searchbar.module.css";
 
-const Searchbar = function Searchbar({ onSubmit }) {
-    const [query, setQuery] = useState("");
-
-    const handleInputChange = (e) => {
-        setQuery(e.target.value.toLowerCase());
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (query.trim() === "") {
-            alert.error("Enter your search query");
-            return;
-        }
-
-        onSubmit(query);
-    };
+const Searchbar = function Searchbar({
+    handleSubmit,
+    handleInputChange,
+    inputValue,
+}) {
     return (
         <header className={css.Searchbar}>
             <form className={css.SearchForm} onSubmit={handleSubmit}>
@@ -30,7 +18,7 @@ const Searchbar = function Searchbar({ onSubmit }) {
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos"
-                    value={query}
+                    value={inputValue}
                 />
                 <button type="submit" className={css.SearchFormButton}>
                     <span className={css.SearchFormButtonLabel}>Search</span>

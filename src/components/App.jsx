@@ -11,6 +11,7 @@ import Button from "./Button/Button";
 
 function App() {
     const [query, setQuery] = useState("");
+    const [inputValue, setInputValue] = useState("");
     const [page, setPage] = useState(1);
     const [images, setImages] = useState([]);
     const [error, setError] = useState(null);
@@ -26,8 +27,23 @@ function App() {
         }
     };
 
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value.toLowerCase());
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (inputValue.trim() === "") {
+            alert.error("Enter your search query");
+            return;
+        }
+
+        onSubmit(inputValue);
+    };
+
     useEffect(() => {
-        if (query === "") return;
+        if (!query) return;
 
         const fetchQuery = async (valueQuery) => {
             setIsLoading(true);
@@ -48,7 +64,7 @@ function App() {
     }, [page, query]);
 
     const handleLoadMore = () => {
-        setPage((prevState) => prevState + 1);
+        setPage(page + 1);
     };
 
     const onShow = (url) => {
@@ -64,7 +80,11 @@ function App() {
     return (
         <div className={css.App}>
             {error && <p>Something went wrong: {error.message}</p>}
-            <Searchbar onSubmit={onSubmit} />
+            <Searchbar
+                handleSubmit={handleSubmit}
+                handleInputChange={handleInputChange}
+                inputValue={inputValue}
+            />
             <ImageGallery images={images} onShow={onShow} />
             {images.length && <Button onClick={handleLoadMore} />}
             {isLoading && <Loader />}
