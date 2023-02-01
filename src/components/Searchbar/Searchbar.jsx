@@ -29,6 +29,8 @@ const Searchbar = function Searchbar({
 };
 
 Searchbar.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    inputValue: PropTypes.string.isRequired,
 };
 export default Searchbar;

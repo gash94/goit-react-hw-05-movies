@@ -54,9 +54,7 @@ function App() {
             } catch (error) {
                 setError(error);
             } finally {
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 600);
+                setIsLoading(false);
             }
         };
 
@@ -67,12 +65,12 @@ function App() {
         setPage(page + 1);
     };
 
-    const onShow = (url) => {
+    const onShowModal = (url) => {
         setShowModal(true);
         setLargeImageURL(url);
     };
 
-    const onClose = () => {
+    const onCloseModal = () => {
         setShowModal(false);
         setLargeImageURL("");
     };
@@ -85,10 +83,12 @@ function App() {
                 handleInputChange={handleInputChange}
                 inputValue={inputValue}
             />
-            <ImageGallery images={images} onShow={onShow} />
+            <ImageGallery images={images} onShow={onShowModal} />
             {images.length && <Button onClick={handleLoadMore} />}
             {isLoading && <Loader />}
-            {showModal && <Modal onClose={onClose} image={largeImageURL} />}
+            {showModal && (
+                <Modal onClose={onCloseModal} image={largeImageURL} />
+            )}
         </div>
     );
 }

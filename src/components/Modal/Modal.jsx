@@ -4,21 +4,21 @@ import PropTypes from "prop-types";
 
 import css from "./Modal.module.css";
 
-function Modal({ onClose, image }) {
+function Modal({ onCloseModal, image }) {
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.code === "Escape") {
-                return onClose();
+                return onCloseModal();
             }
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [onClose]);
+    }, [onCloseModal]);
 
     return (
-        <div className={css.Overlay} onClick={onClose}>
+        <div className={css.Overlay} onClick={onCloseModal}>
             <div className={css.Modal}>
                 <img src={image} alt="" />
             </div>
@@ -27,7 +27,7 @@ function Modal({ onClose, image }) {
 }
 
 Modal.propTypes = {
-    onClose: PropTypes.func,
+    onCloseModal: PropTypes.func,
     image: PropTypes.string.isRequired,
 };
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import css from "./ImageGallery.module.css";
 
-export default function ImageGallery({ images, onShow }) {
+export default function ImageGallery({ images, onShowModal }) {
     return (
         <ul className={css.ImageGallery}>
             {images.map(({ webformatURL, largeImageURL, id, tags }) => (
@@ -12,7 +12,7 @@ export default function ImageGallery({ images, onShow }) {
                     key={id}
                     webformatURL={webformatURL}
                     largeImageURL={largeImageURL}
-                    onShow={onShow}
+                    onShow={onShowModal}
                     tags={tags}
                 />
             ))}
@@ -21,7 +21,7 @@ export default function ImageGallery({ images, onShow }) {
 }
 
 ImageGallery.propTypes = {
-    onShow: PropTypes.func,
+    onShowModal: PropTypes.func,
     images: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
