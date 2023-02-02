@@ -84,7 +84,11 @@ function App() {
                 inputValue={inputValue}
             />
             <ImageGallery images={images} onShow={onShowModal} />
-            {images.length && <Button onClick={handleLoadMore} />}
+            {images.length > 0 && !isLoading ? (
+                <Button onClick={handleLoadMore} />
+            ) : (
+                ""
+            )}
             {isLoading && <Loader />}
             {showModal && (
                 <Modal onClose={onCloseModal} image={largeImageURL} />
