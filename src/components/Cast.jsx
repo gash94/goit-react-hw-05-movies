@@ -20,12 +20,11 @@ const Cast = () => {
 
     return (
         <>
-            <ul>
+            <ul className={css.castList}>
                 {movieCast.map(
                     ({ id, profile_path, original_name, name, character }) => (
                         <li key={id}>
                             <img
-                                className={css.img}
                                 src={
                                     profile_path
                                         ? `https://www.themoviedb.org/t/p/w500/${profile_path}`
@@ -33,7 +32,7 @@ const Cast = () => {
                                 }
                                 alt={original_name}
                             />
-                            <h4>{name}</h4>
+                            <h3>{name}</h3>
                             <p>Character: {character}</p>
                         </li>
                     )

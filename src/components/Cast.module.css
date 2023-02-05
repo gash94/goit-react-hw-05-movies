@@ -1,0 +1,13 @@
+.castList {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.castList li {
+    width: 260px;
+}

@@ -1,0 +1,15 @@
+.listReviews {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.listReviews li {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 10px;
+    height: 200px;
+    overflow: auto;
+}
