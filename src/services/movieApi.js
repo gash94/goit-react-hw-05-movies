@@ -24,13 +24,13 @@ export const fetchTrendingMovies = async () => {
 };
 
 export const getMovieCast = async (movieId) => {
-    const queryString = `movie/${movieId}/credits$?api_key=<<api_key>>&language=en-US`;
-    const { data } = await axios.get(queryString);
-    return data;
+    const queryString = `movie/${movieId}/credits?api_key=${API_KEY}`;
+    const response = await axios.get(queryString);
+    return response.data.cast;
 };
 
 export const getReviews = async (movieId) => {
-    const queryString = `movie/${movieId}/reviews$?api_key=<<api_key>>&language=en-US`;
-    const { data } = await axios.get(queryString);
-    return data;
+    const queryString = `movie/${movieId}/reviews?api_key=${API_KEY}`;
+    const response = await axios.get(queryString);
+    return response.data.results;
 };

@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMovieDetails, IMAGE_URL } from "../services/movieApi";
 
@@ -19,7 +19,7 @@ const MovieDetails = () => {
     return (
         <>
             {!movie ? (
-                <div className={css.notFound}>This movie is not found</div>
+                <div>This movie is not found</div>
             ) : (
                 <>
                     <Link to="/">
@@ -62,6 +62,7 @@ const MovieDetails = () => {
                     <button type="button">Reviews</button>
                 </Link>
             </nav>
+            <Outlet />
         </>
     );
 };
