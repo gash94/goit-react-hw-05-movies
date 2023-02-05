@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchTrendingMovies } from "../services/movieApi";
 import { Link, useLocation } from "react-router-dom";
+
+import { fetchTrendingMovies } from "../services/movieApi";
 
 const Home = () => {
     const location = useLocation();
@@ -24,15 +25,8 @@ const Home = () => {
                     movies.map(({ id, title }) => (
                         <li key={id}>
                             <Link
-                                to={{
-                                    pathname: `/movies/${`${id}`}`,
-                                    state: {
-                                        from: {
-                                            location,
-                                            label: "Back to Home",
-                                        },
-                                    },
-                                }}>
+                                to={`/movies/${id}`}
+                                state={{ from: location }}>
                                 <p>{title}</p>
                             </Link>
                         </li>
