@@ -1,0 +1,19 @@
+button {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    margin-left: 10px;
+}
+.movieContainer {
+    display: flex;
+    justify-content: center;
+
+    padding: 10px;
+}
+.movieImg {
+    margin-right: 10px;
+}
+
+img {
+    width: 250px;
+}
