@@ -1,100 +1,21 @@
-import { useState, useEffect } from "react";
-import fetchImg from "../services/PixabayApi";
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Movies from "../pages/Movies";
+import Nav from "./Nav";
 
 import css from "./App.module.css";
 
-import Loader from "./Loader/Loader";
-import Searchbar from "./Searchbar/Searchbar";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import Modal from "./Modal/Modal";
-import Button from "./Button/Button";
-
-function App() {
-    const [query, setQuery] = useState("");
-    const [inputValue, setInputValue] = useState("");
-    const [page, setPage] = useState(1);
-    const [images, setImages] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [largeImageURL, setLargeImageURL] = useState("");
-
-    const onSubmit = (queryInput) => {
-        if (queryInput !== query) {
-            setImages([]);
-            setPage(1);
-            setQuery(queryInput);
-        }
-    };
-
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value.toLowerCase());
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (inputValue.trim() === "") {
-            alert.error("Enter your search query");
-            return;
-        }
-
-        onSubmit(inputValue);
-    };
-
-    useEffect(() => {
-        if (!query) return;
-
-        const fetchQuery = async (valueQuery) => {
-            setIsLoading(true);
-            setError(null);
-            try {
-                const response = await fetchImg(valueQuery, page);
-                setImages((prevState) => [...prevState, ...response]);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchQuery(query);
-    }, [page, query]);
-
-    const handleLoadMore = () => {
-        setPage(page + 1);
-    };
-
-    const onShowModal = (url) => {
-        setShowModal(true);
-        setLargeImageURL(url);
-    };
-
-    const onCloseModal = () => {
-        setShowModal(false);
-        setLargeImageURL("");
-    };
-
+const App = () => {
     return (
         <div className={css.App}>
-            {error && <p>Something went wrong: {error.message}</p>}
-            <Searchbar
-                handleSubmit={handleSubmit}
-                handleInputChange={handleInputChange}
-                inputValue={inputValue}
-            />
-            <ImageGallery images={images} onShow={onShowModal} />
-            {images.length > 0 && !isLoading ? (
-                <Button onClick={handleLoadMore} />
-            ) : (
-                ""
-            )}
-            {isLoading && <Loader />}
-            {showModal && (
-                <Modal onClose={onCloseModal} image={largeImageURL} />
-            )}
+            <Nav />
+            <Routes>
+                <Route path="/*" element={<Home />} />
+                <Route path="/movies" element={<Movies />} />
+                <Route path="/movies/:movieId" element={<Movies />} />
+            </Routes>
         </div>
     );
-}
+};
 
 export default App;
