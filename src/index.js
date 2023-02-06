@@ -7,7 +7,7 @@ import App from "./components/App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <BrowserRouter basename="goit-react-hw-05-movies">
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <App />
         </BrowserRouter>
     </React.StrictMode>
