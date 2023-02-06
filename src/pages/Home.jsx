@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
 import { fetchTrendingMovies } from "../services/movieApi";
 
 const Home = () => {
@@ -10,10 +9,8 @@ const Home = () => {
     useEffect(() => {
         const getMovies = async () => {
             const { results } = await fetchTrendingMovies();
-
             setMovies(results);
         };
-
         getMovies();
     }, []);
 

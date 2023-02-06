@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useLocation, Link } from "react-router-dom";
-import css from "./Movies.module.css";
-
 import { searchMovies } from "../services/movieApi";
+import css from "./Movies.module.css";
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
@@ -12,9 +11,7 @@ const Movies = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const input = event.currentTarget;
-
         setSearchParams(
             query !== "" ? { query: input.elements.query.value } : {}
         );
@@ -25,10 +22,8 @@ const Movies = () => {
         if (query === "" || query === null) return;
         const getMovies = async () => {
             const { results } = await searchMovies(query);
-
             setMovies(results);
         };
-
         getMovies();
     }, [query]);
 
