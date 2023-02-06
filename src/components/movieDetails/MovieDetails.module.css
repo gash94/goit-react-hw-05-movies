@@ -6,10 +6,10 @@ button {
 }
 .movieContainer {
     display: flex;
-    justify-content: center;
-
+    justify-content: flex-start;
     padding: 10px;
 }
+
 .movieImg {
     margin-right: 10px;
 }
