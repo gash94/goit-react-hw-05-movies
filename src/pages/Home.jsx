@@ -19,7 +19,7 @@ const Home = () => {
 
     return (
         <>
-            <h1>Tranding today</h1>
+            <h1>Tranding movies today:</h1>
             <ul>
                 {movies &&
                     movies.map(({ id, title }) => (

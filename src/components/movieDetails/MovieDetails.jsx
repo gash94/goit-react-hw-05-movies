@@ -1,6 +1,6 @@
 import { useParams, Link, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getMovieDetails, IMAGE_URL } from "../services/movieApi";
+import { getMovieDetails, IMAGE_URL } from "../../services/movieApi";
 
 import css from "./MovieDetails.module.css";
 
@@ -54,14 +54,14 @@ const MovieDetails = () => {
             )}
 
             <h2>Additional information</h2>
-            <nav>
+            <div>
                 <Link to={"cast"}>
                     <button type="button">Cast</button>
                 </Link>
                 <Link to={"reviews"}>
                     <button type="button">Reviews</button>
                 </Link>
-            </nav>
+            </div>
             <Outlet />
         </>
     );
