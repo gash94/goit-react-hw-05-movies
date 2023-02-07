@@ -1,25 +1,18 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledLink = styled(NavLink)`
-    display: inline-block;
-    color: black;
-    padding: 20px;
-    font-weight: 500;
-    text-decoration: none;
-    color: #2a363b;
-    font-size: 30px;
-
-    &.active {
-        color: orange;
-        text-decoration: underline;
-    }
-`;
+import css from "./Nav.module.css";
 
 const Nav = () => (
     <nav>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/movies">Movies</StyledLink>
+        <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? css.active : undefined)}>
+            Home
+        </NavLink>
+        <NavLink
+            to="movies"
+            className={({ isActive }) => (isActive ? css.active : undefined)}>
+            Movies
+        </NavLink>
     </nav>
 );
 export default Nav;
